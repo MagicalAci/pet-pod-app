@@ -1,0 +1,392 @@
+.preview2d-page {
+  min-height: 100vh;
+  background: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(70px + env(safe-area-inset-bottom));
+}
+
+// ==================== 顶部进度 ====================
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  
+  .step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #999;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .step-text {
+    font-size: 11px;
+    color: #999;
+  }
+  
+  &.active {
+    .step-dot {
+      background: linear-gradient(135deg, #FF8C61 0%, #FF6B9D 100%);
+      color: white;
+    }
+    .step-text {
+      color: #FF8C61;
+      font-weight: 500;
+    }
+  }
+  
+  &.done {
+    .step-dot {
+      background: #52c41a;
+      color: white;
+    }
+    .step-text {
+      color: #52c41a;
+    }
+  }
+}
+
+.step-line {
+  width: 40px;
+  height: 2px;
+  background: #e0e0e0;
+  margin: 0 8px;
+  margin-bottom: 18px;
+  
+  &.active {
+    background: linear-gradient(90deg, #52c41a, #FF8C61);
+  }
+}
+
+// ==================== 主内容区 ====================
+.main-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+// ==================== AI预览容器 ====================
+.ai-preview-container {
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+// 加载状态
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #FFE4CC;
+  border-top-color: #FF8C61;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.loading-step {
+  font-size: 14px;
+  color: #FF8C61;
+  margin-bottom: 16px;
+}
+
+.loading-bar {
+  width: 200px;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.loading-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF8C61, #FF6B9D);
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+.loading-percent {
+  font-size: 13px;
+  color: #999;
+}
+
+// AI大图容器
+.ai-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; // 1:1正方形
+  border-radius: 16px;
+  overflow: hidden;
+  border: 3px solid #FF8C61;
+  box-shadow: 0 8px 32px rgba(255, 140, 97, 0.25);
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+.ai-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ai-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #FF8C61, #FF6B9D);
+  padding: 6px 14px;
+  border-radius: 20px;
+  z-index: 10;
+  
+  Text {
+    font-size: 12px;
+    color: white;
+    font-weight: 600;
+  }
+}
+
+// 原图小缩略图 - 附着在大图内部右下角
+.original-thumb {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  background: white;
+  z-index: 10;
+}
+
+.thumb-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #FF8C61, #FF6B9D);
+  padding: 3px 0;
+  text-align: center;
+  
+  Text {
+    font-size: 9px;
+    color: white;
+    font-weight: 600;
+  }
+}
+
+// ==================== 风格选择 ====================
+.style-section {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.style-list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.style-item {
+  flex-shrink: 0;
+  width: 72px;
+  text-align: center;
+  position: relative;
+  
+  &.active {
+    .style-preview {
+      border-color: #FF8C61;
+      box-shadow: 0 4px 16px rgba(255, 140, 97, 0.3);
+    }
+    .style-name {
+      color: #FF8C61;
+      font-weight: 600;
+    }
+  }
+}
+
+.style-preview {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #eee;
+  margin-bottom: 6px;
+  background: #f5f5f5;
+  display: block;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.style-preview taro-image-core,
+.style-preview image,
+.style-preview img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.style-icon {
+  font-size: 28px;
+}
+
+.style-name {
+  font-size: 12px;
+  color: #666;
+}
+
+.style-check {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  background: #52c41a;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+// ==================== 重新生成按钮 ====================
+.regen-btn {
+  text-align: center;
+  padding: 14px;
+  background: #FFF5E6;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  
+  Text {
+    font-size: 14px;
+    color: #FF8C61;
+  }
+  
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+// ==================== 底部固定栏 ====================
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  background: white;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  z-index: 100;
+}
+
+.back-btn {
+  flex: 0 0 90px;
+  padding: 14px;
+  text-align: center;
+  background: #f5f5f5;
+  border-radius: 12px;
+  
+  Text {
+    font-size: 15px;
+    color: #666;
+  }
+  
+  &:active {
+    background: #eee;
+  }
+}
+
+.next-btn {
+  flex: 1;
+  padding: 14px;
+  text-align: center;
+  background: linear-gradient(135deg, #FF8C61 0%, #FF6B9D 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(255, 107, 157, 0.4);
+  
+  Text {
+    font-size: 15px;
+    color: white;
+    font-weight: 600;
+  }
+  
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}

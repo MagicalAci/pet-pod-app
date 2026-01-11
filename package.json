@@ -1,0 +1,66 @@
+{
+  "name": "pet-3d-pod",
+  "version": "1.0.0",
+  "private": true,
+  "description": "宠物3D定制小程序 - 上传图片生成3D模型并定制商品",
+  "templateInfo": {
+    "name": "default",
+    "typescript": true,
+    "css": "sass"
+  },
+  "scripts": {
+    "build:weapp": "taro build --type weapp",
+    "build:swan": "taro build --type swan",
+    "build:alipay": "taro build --type alipay",
+    "build:tt": "taro build --type tt",
+    "build:h5": "taro build --type h5",
+    "build:rn": "taro build --type rn",
+    "dev:weapp": "npm run build:weapp -- --watch",
+    "dev:swan": "npm run build:swan -- --watch",
+    "dev:alipay": "npm run build:alipay -- --watch",
+    "dev:tt": "npm run build:tt -- --watch",
+    "dev:h5": "npm run build:h5 -- --watch",
+    "dev:rn": "npm run build:rn -- --watch"
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Android >= 4.1",
+    "ios >= 8"
+  ],
+  "author": "",
+  "dependencies": {
+    "@babel/runtime": "^7.21.0",
+    "@react-three/drei": "^9.92.0",
+    "@react-three/fiber": "^8.15.0",
+    "@tarojs/components": "3.6.22",
+    "@tarojs/helper": "3.6.22",
+    "@tarojs/plugin-framework-react": "^3.6.22",
+    "@tarojs/plugin-platform-alipay": "3.6.22",
+    "@tarojs/plugin-platform-h5": "3.6.22",
+    "@tarojs/plugin-platform-swan": "3.6.22",
+    "@tarojs/plugin-platform-tt": "3.6.22",
+    "@tarojs/plugin-platform-weapp": "3.6.22",
+    "@tarojs/react": "3.6.22",
+    "@tarojs/runtime": "3.6.22",
+    "@tarojs/shared": "3.6.22",
+    "@tarojs/taro": "3.6.22",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.160.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
+    "@tarojs/cli": "3.6.22",
+    "@tarojs/webpack5-runner": "3.6.22",
+    "@types/react": "^18.2.0",
+    "babel-preset-taro": "3.6.22",
+    "eslint": "^8.36.0",
+    "eslint-config-taro": "3.6.22",
+    "react-refresh": "^0.18.0",
+    "sass": "^1.69.0",
+    "stylelint": "^15.10.0",
+    "typescript": "^5.0.0",
+    "webpack": "^5.78.0"
+  }
+}

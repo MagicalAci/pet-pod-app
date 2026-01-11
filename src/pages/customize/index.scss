@@ -1,0 +1,603 @@
+.customize-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FDF8F3 0%, #F5EDE4 100%);
+  padding: 12px;
+  padding-bottom: 0;
+  box-sizing: border-box;
+}
+
+// ==================== 优惠券弹窗 ====================
+.coupon-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.coupon-modal {
+  width: 320px;
+  background: linear-gradient(180deg, #FFF9F0 0%, #FFFFFF 100%);
+  border-radius: 24px;
+  padding: 24px 20px;
+  position: relative;
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  Text {
+    font-size: 20px;
+    color: #666;
+    line-height: 1;
+  }
+}
+
+.modal-header {
+  text-align: center;
+  position: relative;
+  margin-bottom: 20px;
+  
+  .confetti {
+    position: absolute;
+    font-size: 20px;
+    animation: float 2s ease-in-out infinite;
+    
+    &.c1 { top: -10px; left: 20px; animation-delay: 0s; }
+    &.c2 { top: -5px; right: 30px; animation-delay: 0.3s; }
+    &.c3 { top: 5px; left: 50%; animation-delay: 0.6s; }
+  }
+  
+  .modal-title {
+    display: block;
+    font-size: 22px;
+    font-weight: 800;
+    color: #C9A86C;
+    margin-bottom: 4px;
+  }
+  
+  .modal-subtitle {
+    display: block;
+    font-size: 13px;
+    color: #888;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(10deg); }
+}
+
+.coupon-card-modal {
+  display: flex;
+  background: linear-gradient(135deg, #C9A86C 0%, #A67C52 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(166, 124, 82, 0.3);
+  margin-bottom: 20px;
+}
+
+.coupon-left {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  
+  .coupon-symbol {
+    font-size: 18px;
+    color: #fff;
+    opacity: 0.9;
+    margin-right: 2px;
+  }
+  
+  .coupon-amount {
+    font-size: 42px;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.coupon-divider {
+  width: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  .circle {
+    width: 16px;
+    height: 16px;
+    background: #FDF8F3;
+    border-radius: 50%;
+    position: absolute;
+    
+    &.top { top: -8px; }
+    &.bottom { bottom: -8px; }
+  }
+  
+  .dashed-line {
+    width: 2px;
+    height: 60%;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.5) 0px,
+      rgba(255, 255, 255, 0.5) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  }
+}
+
+.coupon-right {
+  flex: 1;
+  padding: 16px 16px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  .coupon-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    display: block;
+    margin-bottom: 2px;
+  }
+  
+  .coupon-condition {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8);
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
+.countdown-box {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 6px 10px;
+  
+  .countdown-label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.9);
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  .countdown-timer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    
+    .time-block {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      padding: 4px 8px;
+      
+      Text {
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        font-family: 'SF Mono', monospace;
+      }
+    }
+    
+    .time-sep {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+  }
+}
+
+.use-coupon-btn {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%);
+  border-radius: 50px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(255, 82, 82, 0.4);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+  
+  .btn-text {
+    display: block;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  
+  .btn-sub {
+    display: block;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 12px rgba(255, 82, 82, 0.3);
+  }
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+.modal-tip {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  color: #999;
+  margin-top: 12px;
+}
+
+// ==================== 产品卡片 ====================
+.product-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 2px 12px rgba(166, 124, 82, 0.08);
+  margin-bottom: 16px;
+
+  .product-image {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: linear-gradient(135deg, #FDF8F3, #F5EDE4);
+  }
+
+  .product-info {
+    flex: 1;
+
+    .product-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a2e;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .product-style {
+      font-size: 13px;
+      color: #888;
+    }
+  }
+}
+
+// ==================== 通用区块 ====================
+.section {
+  margin-bottom: 16px;
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a2e;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+// ==================== 材质网格 ====================
+.material-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+
+  .material-card {
+    position: relative;
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px 10px;
+    text-align: center;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s ease;
+
+    &.active {
+      border-color: #C9A86C;
+      background: #FDF8F3;
+    }
+
+    .check-icon {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 20px;
+      height: 20px;
+      background: #C9A86C;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .tag {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: #C9A86C;
+      color: #fff;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+
+    .icon {
+      font-size: 26px;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a2e;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .price {
+      font-size: 12px;
+      color: #C9A86C;
+      font-weight: 500;
+    }
+  }
+}
+
+// ==================== 尺寸选择 ====================
+.size-row {
+  display: flex;
+  gap: 8px;
+
+  .size-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 6px;
+    text-align: center;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s ease;
+
+    &.active {
+      border-color: #C9A86C;
+      background: #FDF8F3;
+    }
+
+    .size-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a2e;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .size-desc {
+      font-size: 10px;
+      color: #888;
+    }
+  }
+}
+
+// ==================== 优惠券状态卡片 ====================
+.coupon-status-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  border: 2px dashed #ddd;
+  transition: all 0.3s ease;
+
+  &.applied {
+    border: 2px solid #C9A86C;
+    background: linear-gradient(135deg, #FDF8F3 0%, #FAF3EB 100%);
+    
+    .coupon-applied-tag {
+      background: linear-gradient(135deg, #C9A86C 0%, #A67C52 100%);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+  }
+  
+  .coupon-applied-icon,
+  .coupon-pending-icon {
+    font-size: 32px;
+  }
+  
+  .coupon-applied-info,
+  .coupon-pending-info {
+    flex: 1;
+    
+    .coupon-applied-title,
+    .coupon-pending-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 2px;
+    }
+    
+    .coupon-applied-desc {
+      font-size: 12px;
+      color: #C9A86C;
+      font-weight: 500;
+    }
+    
+    .coupon-pending-countdown {
+      Text {
+        font-size: 12px;
+        color: #FF5252;
+        font-weight: 500;
+      }
+    }
+  }
+  
+  .coupon-pending-btn {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%);
+    padding: 8px 16px;
+    border-radius: 20px;
+    
+    Text {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+  }
+}
+
+// ==================== 底部支付栏 ====================
+.footer-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0));
+  background: linear-gradient(180deg, #FFFFFF 0%, #FDFCFA 100%);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
+  z-index: 100;
+  border-top: 1px solid rgba(201, 168, 108, 0.1);
+
+  .price-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+    .discount-hint {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      
+      .discount-icon {
+        font-size: 12px;
+      }
+      
+      .discount-text {
+        font-size: 11px;
+        color: #C9A86C;
+        font-weight: 500;
+      }
+    }
+    
+    .price-main {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+
+      .original-price {
+        font-size: 13px;
+        color: #bbb;
+        text-decoration: line-through;
+        font-weight: 400;
+      }
+      
+      .price-value {
+        font-size: 28px;
+        font-weight: 800;
+        color: #C9A86C;
+        letter-spacing: -1px;
+        transition: all 0.3s;
+        
+        &.animating {
+          color: #FF5252;
+          animation: priceShake 0.08s ease-in-out infinite;
+        }
+      }
+    }
+  }
+
+  .pay-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #07C160 0%, #06AD56 100%);
+    min-width: 140px;
+    padding: 14px 24px;
+    border-radius: 50px;
+    box-shadow: 0 4px 16px rgba(7, 193, 96, 0.35);
+    
+    .pay-icon {
+      font-size: 16px;
+    }
+    
+    .pay-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    &:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 8px rgba(7, 193, 96, 0.3);
+    }
+  }
+}
+
+@keyframes priceShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+

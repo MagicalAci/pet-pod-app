@@ -1,0 +1,470 @@
+.preview3d-page {
+  min-height: 100vh;
+  background: #1a1a2e;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+
+// ==================== 进度指示 ====================
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  background: white;
+  margin: 12px;
+  border-radius: 16px;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  
+  .step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #999;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .step-label {
+    font-size: 11px;
+    color: #999;
+  }
+  
+  &.active {
+    .step-dot {
+      background: linear-gradient(135deg, #FF8C61 0%, #FF6B9D 100%);
+      color: white;
+    }
+    .step-label {
+      color: #FF8C61;
+      font-weight: 500;
+    }
+  }
+  
+  &.done {
+    .step-dot {
+      background: #52c41a;
+      color: white;
+    }
+    .step-label {
+      color: #52c41a;
+    }
+  }
+}
+
+.progress-line {
+  width: 36px;
+  height: 2px;
+  background: #e0e0e0;
+  margin: 0 8px;
+  margin-bottom: 16px;
+  
+  &.done {
+    background: #52c41a;
+  }
+  
+  &.active {
+    background: linear-gradient(90deg, #52c41a, #FF8C61);
+  }
+}
+
+// ==================== 3D预览区 ====================
+.viewer-section {
+  padding: 0 12px;
+}
+
+.viewer-card {
+  background: #16213e;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid #0f3460;
+}
+
+// 加载状态
+.loading-state {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  border: 4px solid rgba(255, 140, 97, 0.2);
+  border-top-color: #FF8C61;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  display: block;
+  font-size: 18px;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.loading-bar {
+  width: 200px;
+  height: 6px;
+  margin: 0 auto 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF8C61, #FF6B9D);
+  border-radius: 3px;
+  transition: width 0.2s;
+}
+
+.loading-percent {
+  font-size: 14px;
+  color: #FF8C61;
+}
+
+// 3D交互查看器容器
+.model-3d-container {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  background: #16213e;
+  border-radius: 0;
+}
+
+.model-badge-3d {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #FF8C61, #FF6B9D);
+  padding: 6px 14px;
+  border-radius: 20px;
+  z-index: 20;
+  
+  Text {
+    font-size: 12px;
+    color: white;
+    font-weight: 600;
+  }
+}
+
+.fallback-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  background: #16213e;
+  
+  Text {
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+  }
+}
+
+.model-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  color: #FF8C61;
+  
+  Text {
+    font-size: 14px;
+  }
+}
+
+// 模型展示区
+.model-display {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; // 1:1
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.model-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.model-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: linear-gradient(135deg, #FF8C61, #FF6B9D);
+  padding: 6px 14px;
+  border-radius: 20px;
+  
+  Text {
+    font-size: 12px;
+    color: white;
+    font-weight: 600;
+  }
+}
+
+// 左右导航按钮
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 140, 97, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  Text {
+    font-size: 24px;
+    color: white;
+    font-weight: 300;
+  }
+  
+  &.left {
+    left: 12px;
+  }
+  
+  &.right {
+    right: 12px;
+  }
+  
+  &:active {
+    background: rgba(255, 140, 97, 1);
+    transform: translateY(-50%) scale(0.95);
+  }
+}
+
+// 视角指示器
+.view-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transition: all 0.3s;
+  
+  &.active {
+    width: 24px;
+    border-radius: 4px;
+    background: #FF8C61;
+  }
+}
+
+// 提示栏
+.hint-bar {
+  text-align: center;
+  padding: 12px;
+  background: rgba(255, 140, 97, 0.1);
+  
+  Text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+}
+
+// 控制按钮
+.controls {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+
+.control-btn {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  background: rgba(255, 140, 97, 0.15);
+  border: 1px solid rgba(255, 140, 97, 0.3);
+  border-radius: 12px;
+  
+  Text {
+    font-size: 13px;
+    color: #FF8C61;
+  }
+  
+  &.active {
+    background: rgba(255, 140, 97, 0.25);
+  }
+  
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+// ==================== 信息卡片 ====================
+.info-card {
+  margin: 12px;
+  background: #16213e;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.info-row {
+  flex: 1;
+  text-align: center;
+}
+
+.info-label {
+  display: block;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+
+.info-value {
+  display: block;
+  font-size: 15px;
+  color: white;
+  font-weight: 500;
+  
+  &.success {
+    color: #52c41a;
+  }
+}
+
+.info-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,0.1);
+}
+
+// ==================== 规格卡片 ====================
+.spec-card {
+  margin: 12px;
+  background: #16213e;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.spec-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.spec-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spec-item {
+  text-align: center;
+}
+
+.spec-label {
+  display: block;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+
+.spec-value {
+  display: block;
+  font-size: 13px;
+  color: #FF8C61;
+  font-weight: 500;
+}
+
+// ==================== 提示卡片 ====================
+.tip-card {
+  margin: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 140, 97, 0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tip-icon {
+  font-size: 20px;
+}
+
+.tip-text {
+  flex: 1;
+  font-size: 13px;
+  color: #FF8C61;
+  line-height: 1.5;
+}
+
+// ==================== 底部按钮 ====================
+.footer-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #1a1a2e;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(255,255,255,0.1);
+  z-index: 100;
+}
+
+.back-btn {
+  flex: 0 0 80px;
+  padding: 14px;
+  text-align: center;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  
+  Text {
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+  }
+}
+
+.next-btn {
+  flex: 1;
+  padding: 14px;
+  text-align: center;
+  background: linear-gradient(135deg, #FF8C61 0%, #FF6B9D 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(255, 107, 157, 0.4);
+  
+  Text {
+    font-size: 15px;
+    color: white;
+    font-weight: 600;
+  }
+  
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}

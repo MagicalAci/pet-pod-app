@@ -1,0 +1,245 @@
+.mine-page {
+  min-height: 100vh;
+  background: #F5F5F5;
+}
+
+// 用户卡片
+.user-card {
+  position: relative;
+  margin: 16px;
+  padding: 20px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  .user-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(135deg, #FF7B54 0%, #FF9B7A 100%);
+  }
+
+  .user-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .avatar {
+      width: 60px;
+      height: 60px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+      .avatar-emoji {
+        font-size: 32px;
+      }
+    }
+
+    .user-info {
+      flex: 1;
+      margin-left: 14px;
+
+      .user-name {
+        display: block;
+        font-size: 18px;
+        font-weight: 700;
+        color: white;
+      }
+
+      .user-id {
+        display: block;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 2px;
+      }
+    }
+
+    .vip-badge {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      padding: 4px 12px;
+      border-radius: 12px;
+
+      Text {
+        font-size: 11px;
+        color: #5D4037;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .user-stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+
+    .stat-item {
+      text-align: center;
+
+      .stat-num {
+        display: block;
+        font-size: 22px;
+        font-weight: 700;
+        color: #FF7B54;
+      }
+
+      .stat-label {
+        display: block;
+        font-size: 12px;
+        color: #888;
+        margin-top: 2px;
+      }
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 30px;
+      background: #eee;
+    }
+  }
+}
+
+// 区块
+.section {
+  margin: 16px;
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+
+    .section-more {
+      font-size: 13px;
+      color: #FF7B54;
+    }
+  }
+}
+
+// 订单列表
+.orders-list {
+  .order-card {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .order-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #f5f5f5;
+    }
+
+    .order-info {
+      flex: 1;
+      margin-left: 12px;
+
+      .order-product {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #1a1a2e;
+        margin-bottom: 4px;
+      }
+
+      .order-detail {
+        display: block;
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 2px;
+      }
+
+      .order-date {
+        display: block;
+        font-size: 11px;
+        color: #bbb;
+      }
+    }
+
+    .order-status {
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+}
+
+// 菜单网格
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+  .menu-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+
+    .menu-icon {
+      width: 44px;
+      height: 44px;
+      background: #FFF5F0;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+
+      Text {
+        font-size: 22px;
+      }
+    }
+
+    .menu-title {
+      font-size: 12px;
+      color: #333;
+    }
+
+    .menu-badge {
+      position: absolute;
+      top: 6px;
+      right: 20px;
+      min-width: 16px;
+      height: 16px;
+      background: #FF5252;
+      border-radius: 8px;
+      padding: 0 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      Text {
+        font-size: 10px;
+        color: white;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
