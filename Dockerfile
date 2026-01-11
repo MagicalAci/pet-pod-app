@@ -1,31 +1,38 @@
-# 构建阶段
 FROM node:18-alpine AS builder
+LABEL "language"="nodejs"
+LABEL "framework"="taro"
 
 WORKDIR /app
 
-# 复制 package 文件
 COPY package*.json ./
 
-# 安装依赖
 RUN npm install
 
-# 复制源代码
 COPY . .
 
-# 构建 H5
 RUN npm run build:h5
 
-# 生产阶段 - 使用 nginx 服务静态文件
 FROM nginx:alpine
 
-# 复制构建产物到 nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# 复制 nginx 配置
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# 创建新的 Nginx 配置文件，直接监听 8080
+RUN cat > /etc/nginx/conf.d/default.conf <<'EOF'
+server {
+    listen 8080;
+    listen [::]:8080;
+    server_name localhost;
 
-# 暴露端口
-EXPOSE 80
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        try_files $uri $uri/ /index.html;
+    }
+
+    error_page 404 /index.html;
+}
+EOF
+
+EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]
-
