@@ -1,10 +1,6 @@
 {
+  "$schema": "https://schema.zeabur.app/zeabur-json.json",
   "build": {
-    "command": "npm install && npm run build:h5"
-  },
-  "output": {
-    "dir": "dist"
-  },
-  "static": true
+    "type": "dockerfile"
+  }
 }
-
