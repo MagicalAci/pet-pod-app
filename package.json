@@ -20,7 +20,9 @@
     "dev:alipay": "npm run build:alipay -- --watch",
     "dev:tt": "npm run build:tt -- --watch",
     "dev:h5": "npm run build:h5 -- --watch",
-    "dev:rn": "npm run build:rn -- --watch"
+    "dev:rn": "npm run build:rn -- --watch",
+    "start": "serve dist -l 3000",
+    "build": "npm run build:h5"
   },
   "browserslist": [
     "last 3 versions",
@@ -49,6 +51,7 @@
     "three": "^0.160.0"
   },
   "devDependencies": {
+    "serve": "^14.2.0",
     "@babel/core": "^7.21.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "@tarojs/cli": "3.6.22",
