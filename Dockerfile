@@ -1,38 +1,36 @@
-FROM node:18-alpine AS builder
-LABEL "language"="nodejs"
-LABEL "framework"="taro"
+# 构建阶段 - 使用完整 Node 镜像 (Debian)，不使用 Alpine
+# 因为 Taro CLI 需要 glibc，而 Alpine 使用 musl
+FROM node:18-slim AS builder
 
 WORKDIR /app
 
+# 复制 package 文件和配置文件
 COPY package*.json ./
+COPY config ./config
+COPY tsconfig.json ./
+COPY babel.config.js ./
+COPY project.config.json ./
 
+# 安装依赖
 RUN npm install
 
-COPY . .
+# 复制源代码
+COPY src ./src
+COPY public ./public
 
+# 构建 H5
 RUN npm run build:h5
 
+# 生产阶段 - 使用 nginx 服务静态文件
 FROM nginx:alpine
 
+# 复制构建产物到 nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# 创建新的 Nginx 配置文件，直接监听 8080
-RUN cat > /etc/nginx/conf.d/default.conf <<'EOF'
-server {
-    listen 8080;
-    listen [::]:8080;
-    server_name localhost;
+# 复制 nginx 配置
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-    location / {
-        root /usr/share/nginx/html;
-        index index.html index.htm;
-        try_files $uri $uri/ /index.html;
-    }
-
-    error_page 404 /index.html;
-}
-EOF
-
-EXPOSE 8080
+# 暴露端口
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

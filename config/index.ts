@@ -17,9 +17,7 @@ export default defineConfig(async (merge, { command, mode }) => {
     defineConstants: {},
     copy: {
       patterns: [
-        { from: 'public/', to: 'dist/' },
-        { from: '_headers', to: 'dist/_headers' },
-        { from: '_redirects', to: 'dist/_redirects' }
+        { from: 'public/', to: 'dist/' }
       ],
       options: {}
     },
