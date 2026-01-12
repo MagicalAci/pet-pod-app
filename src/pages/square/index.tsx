@@ -118,6 +118,14 @@ export default function Square() {
       {/* 底部留白 */}
       <View style={{ height: '100px' }} />
 
+      {/* 悬浮发布按钮 */}
+      <View className='publish-fab'>
+        <View className='fab-btn'>
+          <Text className='fab-icon'>✏️</Text>
+          <Text className='fab-text'>发布</Text>
+        </View>
+      </View>
+
       {/* 底部TabBar */}
       <GlassTabBar current={1} />
     </View>
